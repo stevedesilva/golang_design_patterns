@@ -1,6 +1,8 @@
 package lsp
 
-/*
+/*If you have some API that takes a base class and works correctly with that base class,
+then it should also work correctly with the derived class.
+
 Liskov substitution principle  states that if you continue to use generalisations like interfaces,
 for example, then you should not have inherited or you should not have implementors of
 those generalisations break some of the assumptions which are set up at the higher level.
@@ -32,8 +34,11 @@ func (r *Rectangle) SetWidth(width int) {
 	r.width = width
 }
 
+// Use it should continue to work for both square and rectangle
 func UseIt(sized Sized) (area int) {
-	sized.SetHeight(10) // LSP violation : square sets both height and width
+	// by setting the height we are assuming only height is set
+	// LSP violation : however square sets both height and width - resulting in incorrect area
+	sized.SetHeight(10)
 	return sized.GetWidth() * sized.GetHeight()
 }
 
@@ -66,6 +71,9 @@ func (s *Square) GetWidth() int {
 	return s.width
 }
 
+/*
+Solutions
+ */
 type Square2 struct {
 	size int
 }
