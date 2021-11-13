@@ -1,5 +1,8 @@
 package broken
 
+/*
+Interface Segregation Principle (ISP)
+*/
 type Document struct {
 }
 
@@ -29,7 +32,6 @@ Forced to implement functions that it does not need because of bloated interface
 Therefore we need to split the interface
  */
 type OldFashionedPrinter struct {
-
 }
 
 func (o *OldFashionedPrinter) Print(d Document) {

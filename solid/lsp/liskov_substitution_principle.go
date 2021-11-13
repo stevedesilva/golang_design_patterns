@@ -1,6 +1,9 @@
 package lsp
 
-/*If you have some API that takes a base class and works correctly with that base class,
+/*
+Liskov Substitution Principle
+
+If you have some API that takes a base class and works correctly with that base class,
 then it should also work correctly with the derived class.
 
 Liskov substitution principle  states that if you continue to use generalisations like interfaces,
@@ -14,6 +17,15 @@ type Sized interface {
 	SetWidth(width int)
 }
 
+// Use it should continue to work for both square and rectangle
+func UseIt(sized Sized) (area int) {
+	// by setting the height we are assuming only height is set
+	// LSP violation : however square sets both height and width - resulting in incorrect area
+	sized.SetHeight(10)
+	return sized.GetWidth() * sized.GetHeight()
+}
+
+// Rectangle
 type Rectangle struct {
 	width, height int
 }
@@ -34,14 +46,8 @@ func (r *Rectangle) SetWidth(width int) {
 	r.width = width
 }
 
-// Use it should continue to work for both square and rectangle
-func UseIt(sized Sized) (area int) {
-	// by setting the height we are assuming only height is set
-	// LSP violation : however square sets both height and width - resulting in incorrect area
-	sized.SetHeight(10)
-	return sized.GetWidth() * sized.GetHeight()
-}
 
+// Square
 type Square struct {
 	Rectangle
 }
@@ -57,7 +63,7 @@ func (s *Square) SetHeight(height int) {
 	s.height = height
 	s.width = height
 }
-
+// Violation: setting set both height and width
 func (s *Square) SetWidth(width int) {
 	s.width = width
 	s.height = width
@@ -70,6 +76,8 @@ func (s *Square) GetHeight() int {
 func (s *Square) GetWidth() int {
 	return s.width
 }
+
+
 
 /*
 Solutions

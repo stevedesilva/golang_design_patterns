@@ -1,6 +1,9 @@
 package ocp
 
 /*
+
+OCP: Open Closed Principle
+
 So the times in this case, the interface type is open for extension,
 meaning you can implement this interface, but it's close to a modification, which means that you are unlikely to ever modify the
 specification interface and in a similar fashion, you are unlikely to ever modify better filter because there's no reason for us to do so.
