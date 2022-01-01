@@ -1,7 +1,7 @@
 package functional_test
 
 import (
-	"golangDesignPatterns/builder/functional"
+	"golangDesignPatterns/patterns/builder/functional"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -15,18 +15,19 @@ func (t *Tree) Decorate() string {
 }
 
 type TreeColourDecorator struct {
-	Decorator Decorator
+	Decorator  Decorator
 	Decoration string
 }
 
 func (t *TreeColourDecorator) Decorate() string {
-	return fmt.Sprintf("%s %s",t.Decorator.Decorate(), t.Decoration)
+	return fmt.Sprintf("%s %s", t.Decorator.Decorate(), t.Decoration)
 }
+
 type TreeSizeDecorator struct {
 	Decorator Decorator
-	Size string
+	Size      string
 }
 
 func (t *TreeSizeDecorator) Decorate() string {
-	return fmt.Sprintf("%s %s",t.Decorator.Decorate(), t.Size)
+	return fmt.Sprintf("%s %s", t.Decorator.Decorate(), t.Size)
 }

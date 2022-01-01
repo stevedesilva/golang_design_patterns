@@ -7,6 +7,7 @@ type Person struct {
 	CompanyName, Position string
 	AnnualIncome          int
 }
+
 type PersonBuilder struct {
 	person *Person
 }
@@ -21,18 +22,14 @@ func (b *PersonBuilder) Build() *Person {
 	return b.person
 }
 
-// Used to swap between builders
-func (b *PersonBuilder) Lives() *PersonAddressBuilder {
-	return &PersonAddressBuilder{*b}
-}
-
-func (b *PersonBuilder) Work() *PersonJobBuilder {
-	return &PersonJobBuilder{*b}
-}
-
 // DSL
 type PersonAddressBuilder struct {
 	PersonBuilder
+}
+
+// Used to swap between builders
+func (b *PersonBuilder) Lives() *PersonAddressBuilder {
+	return &PersonAddressBuilder{*b}
 }
 
 func (b *PersonAddressBuilder) At(streetAddress string) *PersonAddressBuilder {
@@ -52,6 +49,10 @@ func (b *PersonAddressBuilder) WithPostcode(postcode string) *PersonAddressBuild
 
 type PersonJobBuilder struct {
 	PersonBuilder
+}
+
+func (b *PersonBuilder) Work() *PersonJobBuilder {
+	return &PersonJobBuilder{*b}
 }
 
 func (b *PersonJobBuilder) At(companyName string) *PersonJobBuilder {
