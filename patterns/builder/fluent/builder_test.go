@@ -15,6 +15,8 @@ func TestStringsBuilderShouldPElement(t *testing.T) {
 	sb.WriteString("Hello")
 	sb.WriteString("</p>")
 	assert.Equal(t, "<p>Hello</p>", sb.String())
+	assert.Equal(t, sb.Len(), 12)
+
 }
 
 func TestStringsBuilderShouldPrintUnOrderList(t *testing.T) {

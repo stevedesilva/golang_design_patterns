@@ -1,5 +1,6 @@
 package facet
 
+// When you need multiple builders
 type Person struct {
 	// address
 	StreetAddress, Postcode, City string
