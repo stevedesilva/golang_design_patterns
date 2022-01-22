@@ -11,7 +11,7 @@ type Circle struct {
 }
 
 func (c *Circle) Render() string {
-	return fmt.Sprintf("Radius of the circle %f", c.Radius)
+	return fmt.Sprintf("Circle with radius %.2f", c.Radius)
 }
 
 func (c *Circle) Resize(factor float32) {
@@ -33,4 +33,13 @@ type ColorShapeDecorator struct {
 
 func (c *ColorShapeDecorator) Render() string {
 	return fmt.Sprintf("%s has the colour %s", c.Shape.Render(), c.Colour)
+}
+
+type TransparentShapeDecorator struct {
+	Shape        Shape
+	Transparency float32
+}
+
+func (t TransparentShapeDecorator) Render() string {
+	return fmt.Sprintf("%s has %.2f%% transparency", t.Shape.Render(), t.Transparency)
 }
