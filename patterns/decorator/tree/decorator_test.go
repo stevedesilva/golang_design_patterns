@@ -1,8 +1,9 @@
-package decorator
+package tree
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestTree_Decorate_should_have_size(t *testing.T) {
