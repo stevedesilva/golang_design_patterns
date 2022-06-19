@@ -1,8 +1,8 @@
 module golangDesignPatterns
 
-go 1.16
+go 1.18
 
 require (
-	github.com/spf13/cobra v1.2.1 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
+	github.com/magiconair/properties v1.8.6
+	github.com/stretchr/testify v1.7.2
 )

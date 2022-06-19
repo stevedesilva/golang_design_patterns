@@ -2,6 +2,7 @@ package shape
 
 import "fmt"
 
+// create interface which both concrete class and decorator will implement
 type Shape interface {
 	Render() string
 }
@@ -26,11 +27,13 @@ func (s *Square) Render() string {
 	return fmt.Sprintf("Square with side %.2f", s.Side)
 }
 
+// Decorator embeds concrete struct as a interface
 type ColorShapeDecorator struct {
 	Shape  Shape
 	Colour string
 }
 
+// render function will first call the embedded concrete class's render function, then add its own additions
 func (c *ColorShapeDecorator) Render() string {
 	return fmt.Sprintf("%s has the colour %s", c.Shape.Render(), c.Colour)
 }
