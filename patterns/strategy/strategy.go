@@ -7,9 +7,8 @@ import (
 type OutputFormat int
 
 const (
-	MarkDown OutputFormat = iota
+	Markdown OutputFormat = iota
 	Html
-	Xml
 )
 
 type ListStrategy interface {
@@ -18,33 +17,33 @@ type ListStrategy interface {
 	AddListItem(builder *strings.Builder, item string)
 }
 
-//MarkDown
-type MarkDownListStrategy struct {
+type MarkdownListStrategy struct{}
+
+func (m *MarkdownListStrategy) Start(builder *strings.Builder) {
+
 }
 
-func (m *MarkDownListStrategy) Start(builder *strings.Builder) {
+func (m *MarkdownListStrategy) End(builder *strings.Builder) {
+
 }
 
-func (m *MarkDownListStrategy) End(builder *strings.Builder) {
+func (m *MarkdownListStrategy) AddListItem(
+	builder *strings.Builder, item string) {
+	builder.WriteString(" * " + item + "\n")
 }
 
-func (m *MarkDownListStrategy) AddListItem(builder *strings.Builder, item string) {
-	builder.WriteString("*" + item + "\n")
-}
-
-// Html
 type HtmlListStrategy struct{}
 
-func (h HtmlListStrategy) Start(builder *strings.Builder) {
+func (h *HtmlListStrategy) Start(builder *strings.Builder) {
 	builder.WriteString("<ul>\n")
 }
 
-func (h HtmlListStrategy) End(builder *strings.Builder) {
+func (h *HtmlListStrategy) End(builder *strings.Builder) {
 	builder.WriteString("</ul>\n")
 }
 
-func (h HtmlListStrategy) AddListItem(builder *strings.Builder, item string) {
-	builder.WriteString(" <li>" + item + "</li>\n")
+func (h *HtmlListStrategy) AddListItem(builder *strings.Builder, item string) {
+	builder.WriteString("  <li>" + item + "</li>\n")
 }
 
 type TextProcessor struct {
@@ -53,13 +52,13 @@ type TextProcessor struct {
 }
 
 func NewTextProcessor(listStrategy ListStrategy) *TextProcessor {
-	return &TextProcessor{builder: strings.Builder{}, listStrategy: listStrategy}
+	return &TextProcessor{strings.Builder{}, listStrategy}
 }
 
-func (t *TextProcessor) SetOutputStrategy(format OutputFormat) {
-	switch format {
-	case MarkDown:
-		t.listStrategy = &MarkDownListStrategy{}
+func (t *TextProcessor) SetOutputFormat(fmt OutputFormat) {
+	switch fmt {
+	case Markdown:
+		t.listStrategy = &MarkdownListStrategy{}
 	case Html:
 		t.listStrategy = &HtmlListStrategy{}
 	}
@@ -78,5 +77,6 @@ func (t *TextProcessor) Reset() {
 }
 
 func (t *TextProcessor) String() string {
-	return t.builder.String()
+	s := t.builder.String()
+	return s
 }
