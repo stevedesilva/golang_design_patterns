@@ -1,4 +1,4 @@
-package prototype
+package deepcopy
 
 type Address struct {
 	Street, City, Country string
