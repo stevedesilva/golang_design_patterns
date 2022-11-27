@@ -24,7 +24,7 @@ func (p *oldPerson) SayHello() {
 }
 
 func NewPerson(name string, age int) Person {
-	if age > 100 {
+	if age > 99 {
 		return &oldPerson{name: name, age: age}
 	} else {
 

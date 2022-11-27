@@ -1,4 +1,4 @@
-package struct
+package constructorinterface
 
 import (
 	"reflect"
@@ -16,29 +16,31 @@ func TestNewPerson(t *testing.T) {
 		want Person
 	}{
 		{
-			name: "basic person",
+			name: "old person",
 			args: args{
-				name: "Steve",
-				age:  33,
+				name: "mike",
+				age:  100,
 			},
-			want: &Person{
-				Name:     "Steve",
-				Age:      33,
-				EyeCount: 2,
+			want: &oldPerson{
+				name: "mike",
+				age:  100,
 			},
 		},
 		{
-			name: "basic person",
+			name: "younger person",
 			args: args{
-				name: "Mike Moon",
-				age:  333,
+				name: "ben",
+				age:  10,
 			},
-			want: nil,
+			want: &person{
+				name: "ben",
+				age:  10,
+			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got, _ := NewPerson(tt.args.name, tt.args.age); !reflect.DeepEqual(got, tt.want) {
+			if got := NewPerson(tt.args.name, tt.args.age); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewPerson() = %v, want %v", got, tt.want)
 			}
 		})
