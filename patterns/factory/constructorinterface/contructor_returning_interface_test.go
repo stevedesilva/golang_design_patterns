@@ -1,4 +1,4 @@
-package factory
+package struct
 
 import (
 	"reflect"
@@ -13,7 +13,7 @@ func TestNewPerson(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *Person
+		want Person
 	}{
 		{
 			name: "basic person",
