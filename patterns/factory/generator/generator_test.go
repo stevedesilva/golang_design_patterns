@@ -1,27 +1,20 @@
 package generator
 
 import (
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewEmployeeFactory(t *testing.T) {
-	type args struct {
-		position     string
-		annualIncome int
-	}
-	tests := []struct {
-		name string
-		args args
-		want func(name string) *Employee
-	}{
-		{},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := NewEmployeeFactory(tt.args.position, tt.args.annualIncome); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewEmployeeFactory() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+	developerFactory := NewEmployeeFactory("developer", 100000)
+	managerFactory := NewEmployeeFactory("manager", 150000)
+
+	mike := developerFactory("Mike")
+	steve := managerFactory("Steve")
+
+	assert.Equal(t, mike.Position, "developer")
+	assert.Equal(t, mike.AnnualIncome, 100000)
+	assert.Equal(t, steve.Position, "manager")
+	assert.Equal(t, steve.AnnualIncome, 150000)
 }
